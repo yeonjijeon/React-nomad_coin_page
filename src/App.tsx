@@ -67,6 +67,7 @@ table {
 function App() {
   const [isDark, setIsDark] = useState(false)
   const toggleDark = () => setIsDark((current) => !current)
+
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <GlobalStyle />
