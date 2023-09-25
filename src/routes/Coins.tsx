@@ -18,10 +18,11 @@ export const Header = styled.header`
 const CoinsList = styled.ul``
 
 export const Coin = styled.li`
-  background-color: black;
-  color: ${(props) => props.theme.bgColor};
+  background-color: ${(props) => props.theme.cardBgColor};
+  color: ${(props) => props.theme.textColor};
   margin-bottom: 10px;
   border-radius: 15px;
+  border: 1px solid white;
   a {
     display: flex;
     align-items: center;
@@ -59,7 +60,12 @@ interface CoinInterface {
   type: string
 }
 
-const Coins = () => {
+interface IRouteProps {
+  toggleDark: () => void
+  isDark: boolean
+}
+
+const Coins = ({ toggleDark, isDark }: IRouteProps) => {
   const [coins, setConins] = useState<CoinInterface[]>([])
   const [loading, setLoading] = useState(true)
   useEffect(() => {
@@ -75,6 +81,7 @@ const Coins = () => {
     <Container>
       <Header>
         <Title>코인</Title>
+        <button onClick={toggleDark}>Toggle Dark Mode</button>
       </Header>
       {loading ? (
         <Loader>Loading...</Loader>

@@ -134,6 +134,11 @@ const Coin = () => {
               <span>Open Source:</span>
               <span>{info?.open_source ? 'Yes' : 'No'}</span>
             </OverviewItem>
+            <OverviewItem>
+              <span>Price:</span>
+              <span>${priceInfo?.quotes.USD.price.toFixed(3)}</span>
+              <span>${priceInfo?.quotes?.USD?.price?.toFixed(3)}</span>
+            </OverviewItem>
           </Overview>
           <Description>{info?.description}</Description>
           <Overview>
