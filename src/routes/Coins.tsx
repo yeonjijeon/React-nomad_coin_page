@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { useSetRecoilState } from 'recoil'
+import { isDarkAtom } from '../atoms'
 
 export const Container = styled.div`
   padding: 0px 20px;
@@ -60,14 +62,12 @@ interface CoinInterface {
   type: string
 }
 
-interface IRouteProps {
-  toggleDark: () => void
-  isDark: boolean
-}
-
-const Coins = ({ toggleDark, isDark }: IRouteProps) => {
+const Coins = () => {
   const [coins, setConins] = useState<CoinInterface[]>([])
   const [loading, setLoading] = useState(true)
+  const setDarkAtom = useSetRecoilState(isDarkAtom)
+  const toggleDarkAtom = () => setDarkAtom((prev) => !prev)
+
   useEffect(() => {
     ;(async () => {
       const response = await fetch('https://api.coinpaprika.com/v1/coins')
@@ -81,7 +81,7 @@ const Coins = ({ toggleDark, isDark }: IRouteProps) => {
     <Container>
       <Header>
         <Title>코인</Title>
-        <button onClick={toggleDark}>Toggle Dark Mode</button>
+        <button onClick={toggleDarkAtom}>Toggle Mode</button>
       </Header>
       {loading ? (
         <Loader>Loading...</Loader>

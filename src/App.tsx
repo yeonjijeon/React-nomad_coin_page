@@ -1,7 +1,8 @@
-import { ThemeProvider, createGlobalStyle, withTheme } from 'styled-components'
+import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import Coins from './routes/Coins'
 import { darkTheme, lightTheme } from './theme'
-import { useState } from 'react'
+import { useRecoilValue } from 'recoil'
+import { isDarkAtom } from './atoms'
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -65,13 +66,11 @@ table {
 `
 
 function App() {
-  const [isDark, setIsDark] = useState(false)
-  const toggleDark = () => setIsDark((current) => !current)
-
+  const isDark = useRecoilValue(isDarkAtom)
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
       <GlobalStyle />
-      <Coins toggleDark={toggleDark} isDark={isDark} />
+      <Coins />
     </ThemeProvider>
   )
 }
